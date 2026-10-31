@@ -1,8 +1,40 @@
 # AgenticExercise
 
-Practice programming with Claude Code or Codex. Tell the agent what you want to learn, work through exercises, and ask for hints or a review when you need them.
+A long-term programming practice game for Claude Code or Codex. Choose what you want to learn, work through exercises at your own pace, and earn XP and badges for reviewed accomplishments.
 
-You write the code and tests, then fix issues found in review. The coach uses those attempts to choose what you practice next. It keeps your goals and progress in a separate learner workspace so you can continue in another session.
+You write the code and tests, then fix issues found in review. The coach keeps your history in a separate learner workspace and uses it to choose future exercises. Over weeks and months, your report shows what you've completed, where you've improved, and what still needs practice.
+
+## The long game
+
+The goal is to build or rebuild independent programming skill through practice you enjoy returning to. Following someone else's code and writing a program yourself ask different things of you. The agent coaches while you write, test, and fix your work. Looking up documentation is normal; you don't have to memorize every API.
+
+Your learner workspace is your save. Each exercise ends, and you carry your work, XP, and reviews into the next one. You can practice one language for months or change direction without losing that history.
+
+### A small problem worth finishing
+
+Exercises are focused, practical tasks sized to your available time. You might write a log summarizer or repair an existing component. Each brief specifies behavior you can check and where the task ends. You decide how to build it.
+
+Finish the task, request a review, and make any needed fixes before moving on. Later exercises can reuse an idea without making you maintain or keep expanding every earlier program.
+
+### Infinite replayability
+
+There is no fixed exercise list to exhaust. The coach chooses each new brief from your goals and past reviews. A recurring mistake can become a practice target. A skill you handled well can return later in a different context to check whether it stuck.
+
+Replays give you a different decision to work through. After summarizing valid records, you might handle malformed records under a policy that requires rejecting the input or skipping and reporting bad rows. A later task could revisit aggregation with persistent data or changed ordering requirements. Renaming inputs or adding unrelated features wouldn't provide that practice.
+
+Difficulty follows reviewed evidence of what you can do independently. A new topic can start small even when you've completed many exercises or earned a large XP total.
+
+### Rewards and a report that grows with you
+
+Once you approve reward rules, reviewed completions earn XP. Independently verified delayed revisits can earn retention XP, and badges mark specific milestones.
+
+Your first report may describe one narrow success, with most skills still unassessed. As you complete more reviewed work, it can identify recurring difficulties and show where later attempts resolved them. Delayed revisits add evidence of what you can still do after time away. The report also records help you received, so you can distinguish completed practice from independent work.
+
+Your XP total gives you a record of accomplishments. Linked reviews show what you did and what was verified. XP alone doesn't establish mastery; refreshing the report adds no new evidence or duplicate rewards.
+
+### A habit without streak pressure
+
+You might aim for one exercise a day. If a problem takes longer or you need a break, unfinished work waits for your next session. There are no daily quotas or streaks to protect, and you don't need to keep a daily log. The coach maintains progress records and refreshes your cumulative report after reviewed completion or when you ask.
 
 ## Install and start
 
@@ -78,8 +110,9 @@ In Claude Code, run `/agenticexercise:agenticexercise` for the plugin or `/agent
 Once the skill is loaded, describe what you want to practice:
 
 ```text
-I want to practice Python input validation. I can spend 30 minutes per
-session. I usually get stuck deciding what should happen with bad input.
+I want to practice Python input validation. I'd like to aim for one exercise
+a day, around 30 minutes each, and keep going over the coming months.
+I usually get stuck deciding what should happen with bad input.
 ```
 
 The coach asks questions one at a time, then proposes a setup, including reward rules, for your approval. You'll confirm the learner workspace before it creates records or assigns your first exercise.
@@ -102,7 +135,7 @@ For example, suppose you want to practice Python input validation in 30-minute s
 4. You request a review. The coach checks your submission against the brief using evidence it has permission to access. It might point out a row that crashes the parser and where the failure occurs. You write the fix.
 5. If required behavior hasn't been verified, the review stays provisional. Once the required criteria are verified, the exercise can be marked complete, with any assistance recorded. Those findings inform later exercises. You can also agree on a delayed revisit to check whether you can apply the skill independently in another context.
 
-There's no fixed exercise backlog or daily quota. Unfinished work carries over to the next session unless you choose to pause or change direction.
+After completion, the coach updates your report with the exercise and any earned rewards. Your next exercise draws on that history. If you stop partway through, the coach resumes unfinished work next session unless you choose to pause it or change direction.
 
 ## How coaching works
 
@@ -217,12 +250,12 @@ Let's agree on a delayed revisit for input validation.
 
 ## Limits and privacy
 
-- This is a set of coaching instructions. The host version, model, and higher-priority instructions can affect how well they're followed. The skill cannot guarantee independent practice or learning outcomes.
-- The intended scope for the first release is programming. Customization doesn't establish reliable assessment in other domains.
-- Keep learner records in your confirmed workspace, never in the distributed skill folder. Existing content and conflicting history must be inspected and reconciled, not silently overwritten.
-- The skill doesn't authorize commits, publishing, uploads, installs, or external code transfer. Each requires explicit permission. Reviews also require approval before network access, dependency installation, destructive checks, or other effects you haven't authorized.
-- Workspace files don't establish privacy guarantees for the host. Check your coding agent's data handling before using sensitive code or learner information.
-- Source repository: [1001api/AgenticExercise](https://github.com/1001api/AgenticExercise). Review its license before use.
+- AgenticExercise is a set of coaching instructions for your coding agent. It provides no sandbox or separate learning platform. Coaching quality depends on your host and model, and learning outcomes aren't guaranteed. The first release focuses on programming.
+- Before installing, review the skill files and [license](LICENSE). Choose either the plugin or the standalone skill for your host to avoid loading duplicate instructions. Installation and coaching behavior haven't been smoke-tested on either host.
+- Keep exercises and progress in a learner workspace outside the installed skill folder. Back it up before moving it or merging existing learning records. Skill updates should leave that history untouched.
+- Keep your host's permission controls enabled. Review requests to run commands, install dependencies, access the network, or publish files. The skill asks the agent to seek approval but cannot enforce those boundaries.
+- Your provider may process code and learner records even when the files live locally. Check the provider's data handling and your host settings before using sensitive code or personal information. Keep credentials out of practice material.
+- Source repository: [1001api/AgenticExercise](https://github.com/1001api/AgenticExercise).
 
 ## Read the coaching rules
 
