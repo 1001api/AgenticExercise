@@ -1,74 +1,63 @@
 # AgenticExercise
 
-A long-term programming practice game for Claude Code or Codex. Choose what you want to learn, work through exercises at your own pace, and earn XP and badges for reviewed accomplishments.
+Your coding agent coaches you while you write the code.
 
-You write the code and tests, then fix issues found in review. The coach keeps your history in a separate learner workspace and uses it to choose future exercises. Over weeks and months, your report shows what you've completed, where you've improved, and what still needs practice.
+Practice programming with small, practical exercises chosen for your goals. Get feedback on your work and fix mistakes. You can earn XP and badges for verified accomplishments.
 
-## The long game
+Works with Claude Code and Codex. Exercises follow your goals, with no fixed list or streaks to maintain.
 
-The goal is to build or rebuild independent programming skill through practice you enjoy returning to. Following someone else's code and writing a program yourself ask different things of you. The agent coaches while you write, test, and fix your work. Looking up documentation is normal; you don't have to memorize every API.
+[Install](#install) · [How it works](#how-it-works) · [Rewards](#practice-finish-earn) · [Progress](#progress-that-stays-with-you)
 
-Your learner workspace is your save. Each exercise ends, and you carry your work, XP, and reviews into the next one. You can practice one language for months or change direction without losing that history.
+## Practice, finish, earn
 
-### A small problem worth finishing
+| Accomplishment | Reward |
+| --- | --- |
+| Complete an exercise with verified review | **100 XP** |
+| Independently verify a skill again after an agreed delay | **25 XP**, once per skill |
+| Reach a milestone | **First Finish**, **Independent Builder**, **Retention Check** |
 
-Exercises are focused, practical tasks sized to your available time. You might write a log summarizer or repair an existing component. Each brief specifies behavior you can check and where the task ends. You decide how to build it.
+You approve reward rules during setup. Assisted completions can earn XP, with help recorded. XP tracks completed accomplishments; it does not measure mastery.
 
-Finish the task, request a review, and make any needed fixes before moving on. Later exercises can reuse an idea without making you maintain or keep expanding every earlier program.
+## Install
 
-### Infinite replayability
+Install either your host's plugin or the standalone fallback below. Installing both loads the coaching instructions twice.
 
-There is no fixed exercise list to exhaust. The coach chooses each new brief from your goals and past reviews. A recurring mistake can become a practice target. A skill you handled well can return later in a different context to check whether it stuck.
-
-Replays give you a different decision to work through. After summarizing valid records, you might handle malformed records under a policy that requires rejecting the input or skipping and reporting bad rows. A later task could revisit aggregation with persistent data or changed ordering requirements. Renaming inputs or adding unrelated features wouldn't provide that practice.
-
-Difficulty follows reviewed evidence of what you can do independently. A new topic can start small even when you've completed many exercises or earned a large XP total.
-
-### Rewards and a report that grows with you
-
-Once you approve reward rules, reviewed completions earn XP. Independently verified delayed revisits can earn retention XP, and badges mark specific milestones.
-
-Your first report may describe one narrow success, with most skills still unassessed. As you complete more reviewed work, it can identify recurring difficulties and show where later attempts resolved them. Delayed revisits add evidence of what you can still do after time away. The report also records help you received, so you can distinguish completed practice from independent work.
-
-Your XP total gives you a record of accomplishments. Linked reviews show what you did and what was verified. XP alone doesn't establish mastery; refreshing the report adds no new evidence or duplicate rewards.
-
-### A habit without streak pressure
-
-You might aim for one exercise a day. If a problem takes longer or you need a break, unfinished work waits for your next session. There are no daily quotas or streaks to protect, and you don't need to keep a daily log. The coach maintains progress records and refreshes your cumulative report after reviewed completion or when you ask.
-
-## Install and start
-
-### Claude Code plugin
-
-Run in your terminal:
+### Claude Code
 
 ```sh
 claude plugin marketplace add 1001api/AgenticExercise
 claude plugin install agenticexercise@agenticexercise-marketplace
 ```
 
-Start a new session and run `/agenticexercise:agenticexercise`.
-
-Or install inside Claude Code:
+Start a new session and run:
 
 ```text
-/plugin install agenticexercise --marketplace 1001api/AgenticExercise
+/agenticexercise:agenticexercise
 ```
 
-### Codex plugin
-
-Run in your terminal:
+### Codex
 
 ```sh
 codex plugin marketplace add 1001api/AgenticExercise
 codex plugin add agenticexercise@agenticexercise-marketplace
 ```
 
-Start a new session, then use `/skills` or type `$` and select `agenticexercise`. Use `/plugins` to manage the plugin interactively. If your CLI does not have `plugin` commands, update it or use the standalone-skill fallback below.
+Start a new session. Use `/skills` or type `$` and select `agenticexercise`. Use `/plugins` to manage the plugin.
 
-### Standalone-skill fallback
+<details>
+<summary>Alternate installation and troubleshooting</summary>
 
-Choose either the plugin or the standalone skill to avoid loading the coaching instructions twice. For the standalone skill, paste the matching prompt into your coding agent and let it handle installation.
+#### Install inside Claude Code
+
+```text
+/plugin install agenticexercise --marketplace 1001api/AgenticExercise
+```
+
+#### Standalone skill
+
+If your Codex CLI does not have `plugin` commands, update it or use this fallback. Choose either the plugin or the standalone skill to avoid loading coaching instructions twice.
+
+Paste the matching prompt into your coding agent:
 
 **Claude Code:**
 
@@ -101,80 +90,117 @@ checks actually performed, then tell me how to select agenticexercise with /skil
 or by typing $.
 ```
 
-Use one installation per host. Keep learner records outside the installation directory. File checks alone do not establish that your host discovered the skill.
+Use one installation per host. Keep learner records outside the installation directory.
 
-### Start practicing
+#### Skill not showing up?
 
-In Claude Code, run `/agenticexercise:agenticexercise` for the plugin or `/agenticexercise` for the standalone skill. In Codex, use `/skills` or type `$` and select `agenticexercise`. If missing, restart your session and check that the plugin is enabled, or that the standalone installation contains `SKILL.md` and `references/`. As a session-only fallback, ask your agent to read the inspected `SKILL.md` and its linked references; this does not verify native skill discovery.
+Restart your session. Check that the plugin is enabled, or that the standalone installation contains `SKILL.md` and `references/`.
 
-Once the skill is loaded, describe what you want to practice:
+In Claude Code, run `/agenticexercise:agenticexercise` for the plugin or `/agenticexercise` for the standalone skill. In Codex, use `/skills` or type `$` and select `agenticexercise`.
+
+As a session-only fallback, ask your agent to read the inspected `SKILL.md` and its linked references. This does not verify native skill discovery; file checks alone do not establish that your host discovered the skill.
+
+</details>
+
+## Start your first exercise
+
+Once the skill is loaded, tell your agent what you want to practice:
 
 ```text
-I want to practice Python input validation. I'd like to aim for one exercise
-a day, around 30 minutes each, and keep going over the coming months.
-I usually get stuck deciding what should happen with bad input.
+I've relied on AI for too long. Work is faster, but I miss writing code
+myself and feel my skills slipping. I want to rebuild my Go skills
+and enjoy solving problems again.
+
+I'd like practical problems, starting at medium difficulty, without
+taking on a full project. I'll look up documentation, but won't copy
+solutions or use AI to write my code. Use this folder as my learner workspace.
 ```
 
-The coach asks questions one at a time, then proposes a setup, including reward rules, for your approval. You'll confirm the learner workspace before it creates records or assigns your first exercise.
+The coach asks questions one at a time. You approve the setup, reward rules, and learner workspace before it creates records or assigns your first exercise.
 
-### Updates
+## How it works
 
-For the Claude Code plugin, run `claude plugin update agenticexercise@agenticexercise-marketplace`. For Codex, run `codex plugin marketplace upgrade`, then use `/plugins` to inspect and manage available updates. Restart your session after updating. Maintainers must bump both plugin manifest versions for each release.
+1. Choose a language or topic, set a time budget, and describe where you get stuck.
+2. Get a small problem with clear requirements and completion criteria. The coach leaves the solution to you.
+3. Write code and tests. Ask for a small hint when stuck.
+4. Request a review and fix issues until the required behavior is verified.
+5. Earn approved rewards. The coach uses your history to choose future exercises.
 
-For a standalone skill, reuse your host's installation prompt and ask to update the existing installation. Have the agent compare fresh source with installed files and show additions, changes, and deletions for approval before replacement. Stop on unexpected symlinks or unrelated content. Preserve the old installation until replacement succeeds, remove obsolete policy files only with approval, and verify copied files and relative links. Leave learner code and records unchanged; report any partial failure.
+For example, a Go log summarizer exercise asks you to build a CLI with Go's standard library. It reads newline-delimited JSON logs, counts valid and invalid records, and reports the three most frequent error messages. Malformed records are counted and skipped; file and read failures stop the command with a useful error.
 
-Host discovery and coaching behavior have not been smoke-tested. File and link checks do not validate coaching behavior or certify safe installation.
+You write the code and tests, then explain one error-handling decision during review. The brief specifies the required behavior and completion criteria, leaving implementation choices to you. This example comes from an existing learner exercise; it isn't evidence of a completed review or host behavior test.
 
-## What practice looks like
+<details>
+<summary>Hints, reviews, and independent work</summary>
 
-For example, suppose you want to practice Python input validation in 30-minute sessions. This is a sample session, not a recorded test result.
+Each brief names the skill, expected effort, input/output examples, allowed resources, constraints, and completion criteria. Exercises can cover languages, tooling, algorithms, practical tasks, or a mix. Looking up documentation is normal.
 
-1. The coach asks about your goals, experience, sticking points, time, and preferences, one question at a time. You approve the proposed setup and confirm where learner files should live.
-2. You get an exercise: read an expense CSV and summarize totals by category. The brief spells out expected behavior, how to handle malformed input, constraints, and what counts as finished. It leaves the implementation to you.
-3. You write code and tests. If you ask for a hint, the coach gives one small pointer or diagnostic question, then waits for your attempt.
-4. You request a review. The coach checks your submission against the brief using evidence it has permission to access. It might point out a row that crashes the parser and where the failure occurs. You write the fix.
-5. If required behavior hasn't been verified, the review stays provisional. Once the required criteria are verified, the exercise can be marked complete, with any assistance recorded. Those findings inform later exercises. You can also agree on a delayed revisit to check whether you can apply the skill independently in another context.
+Ask a conceptual question for an explanation, or request a small hint. The coach should not offer starter code, reference solutions, or pseudocode that gives away the implementation.
 
-After completion, the coach updates your report with the exercise and any earned rewards. Your next exercise draws on that history. If you stop partway through, the coach resumes unfinished work next session unless you choose to pause it or change direction.
+If you request a solution, tests, dependency setup, or code edits, the coach explains how that help affects your practice and asks for separate confirmation naming the exercise and scope. Confirmed help is recorded; affected work cannot count as an independent demonstration.
 
-## How coaching works
+Reviews happen when you ask. The coach checks the brief, submission, earlier attempts, and assistance history using evidence it has permission to access. Findings include concrete failing inputs or states and file/line locations where available. You make fixes unless you separately confirm an exception.
 
-### Exercises with a finish line
+Reviews distinguish observed checks, results you reported, and unverified behavior. Outcomes are `revise`, `complete`, or `complete with revisit scheduled`. Missing required verification keeps a review provisional and prevents final completion. Earlier failures remain linked to their resolutions.
 
-Each exercise names the skill you'll practice, how much effort to expect, and what you need to show to finish. The brief includes relevant input/output examples, allowed resources, and work outside its scope. Your reported experience and available time guide the first exercises; reviewed work guides later ones.
+</details>
 
-Practice can cover languages, tooling, algorithms, practical tasks, or a mix. You can change goals, pace, or topic without going through the full onboarding again. Earlier attempts and progress stay in your records.
+## Progress that stays with you
 
-### Help when you ask
+The coach chooses exercises based on reviewed work, not your XP total. There is no fixed exercise list to exhaust. You can change languages, topics, or pace without losing earlier progress or repeating full onboarding.
 
-Ask a conceptual question for an explanation, or request a small hint when you're stuck. The coach should not offer starter code, reference solutions, or pseudocode that gives away the implementation.
+Your report records strengths, gaps, assistance, completed work, and earned rewards. The coach refreshes it after reviewed completion or when you ask.
 
-If you ask for a solution, tests, dependency setup, or edits to your code, the coach explains how that help affects your practice. It then asks for separate confirmation that names the exercise and scope. Confirmed help goes in your records, and the affected work cannot count as an independent demonstration.
+Unfinished work waits until you return. There are no daily quotas, streaks, or daily logs. Keep your learner workspace separate from the installed skill; it holds your saved progress.
 
-### Review you can act on
+<details>
+<summary>Rewards, badges, and evidence rules</summary>
 
-Reviews happen when you ask. The coach reads the brief, your submission, earlier attempts, and assistance history. It reports defects with concrete failing inputs or states and file/line locations where available. You make the fixes unless you separately confirm an exception.
+### XP rules
 
-The review distinguishes checks the coach observed, results you reported, and behavior that remains unverified. Outcomes are `revise`, `complete`, or `complete with revisit scheduled`. Missing required verification prevents final completion. Earlier failures stay in the history, linked to their resolutions.
+During setup, the coach proposes these version-1 rules for approval. Rewards aren't enabled until you agree.
 
-## How practice follows your progress
+| Event | XP | Requirements |
+| --- | --- | --- |
+| Complete an exercise | 100 | A requested review verifies all required criteria. Both `complete` and `complete with revisit scheduled` qualify. Assisted completion also qualifies, with assistance labeled. |
+| Verify retention of a named skill | 25 | After an independent demonstration and an agreed delay, another exercise verifies independent use in a meaningfully different context. Awarded once per skill. |
+| Submit work, receive `revise`, or receive a provisional review | 0 | An attempt alone earns no completion award. Fixing the exercise can earn completion XP once a review verifies the criteria. |
 
-The coach adjusts one part of an exercise at a time based on mistakes that recur, your explanations, work you've completed independently and verified, and later revisits. Completing a task provides evidence for the skills assessed in it, not an entire topic or language.
+Completion XP is awarded once per exercise; retention XP once per named skill. Same-context fixes, self-reported results, repeated reviews, and report refreshes earn no extra XP.
 
-Each skill has its own state:
+### Badges
 
-| State | What it means |
+| Badge | Earned when |
 | --- | --- |
-| `unassessed` | No relevant evidence has been observed yet. Self-reported experience guides setup only. |
-| `practicing` | You've made relevant attempts but haven't met the requirements for independent demonstration. |
-| `demonstrated` | Work you authored independently meets verified criteria, and you can explain a meaningful decision assessed in that work. |
-| `retention checked` | After an agreed delay, independent work verifies the skill again in a meaningfully different context. |
+| `First Finish` | You complete your first reviewed exercise. Any assistance is labeled. |
+| `Independent Builder` | You independently demonstrate an exercise's primary skill: your own work meets verified criteria, and you explain a meaningful decision assessed in that work. |
+| `Retention Check` | You pass your first independently verified delayed skill revisit. |
 
-Substantial hints and solutions receive assistance labels. You'll need fresh independent work before an affected skill can count as demonstrated. Delayed revisits are practice targets you agree to, not automatic calendar reminders.
+Each badge is awarded once, links to supporting evidence, and adds no bonus XP.
 
-## Progress across sessions
+### Example: 225 XP across two exercises
 
-Your learner workspace holds approved goals, the current exercise, your next action, review history, strengths, gaps, and revisit targets. Ask for a progress report to see the evidence and assistance labels behind the assessments.
+This example uses approved default rules. It isn't an actual learner record.
+
+1. Independently complete your first exercise and explain the assessed decision: 100 XP, `First Finish`, and `Independent Builder`.
+2. After an agreed delay, independently complete a different exercise that also verifies retention of that skill: 100 XP + 25 XP, and `Retention Check`.
+
+You now have 225 XP. Another review adds nothing. Revisiting the same skill again earns no further retention XP.
+
+Substantial hints or a solution don't prevent a verified completion from earning 100 XP. Affected skills stay labeled as assisted and need fresh independent evidence before counting as demonstrated or qualifying for a later retention award.
+
+### Reward records
+
+`REPORT.md` holds the XP ledger, total, badges, and evidence links. Each award has a stable ID, rule version, amount, date, evidence link, and assistance label. Corrections preserve the original entry and add a dated adjustment; badge corrections preserve history and mark the badge active or retracted.
+
+You can agree to different reward rules during setup or later. Changes get an explicit rule version and apply going forward, without silently recalculating old awards. There are no mastery levels based on XP.
+
+</details>
+
+<details>
+<summary>Learner files and skill assessments</summary>
+
+### Learner workspace
 
 | File | Purpose |
 | --- | --- |
@@ -184,79 +210,54 @@ Your learner workspace holds approved goals, the current exercise, your next act
 | `exercises/<numeric-id>-<slug>/REVIEW.md` | Dated review attempts, actual checks, findings, assistance, and outcomes. |
 | `REPORT.md` | Cumulative strengths, gaps, completed work, awards, and revisit evidence. |
 
-The coach creates records only when there's something to put in them. Reports refresh after reviewed completion or when you ask. Ordinary conceptual questions don't require updates to your records.
+The coach creates records only when there's something to put in them. Ordinary conceptual questions don't require record updates. Back up your workspace before moving it or merging existing learning records. Skill updates should leave that history untouched.
 
-## XP and rewards
+### Skill assessments
 
-You earn XP for completed practice and verified retention, and badges for specific milestones. The coach chooses harder exercises based on evidence of what you can do independently. A high XP total alone doesn't establish mastery.
+The coach adjusts one part of an exercise at a time based on recurring mistakes, your explanations, independently verified work, and later revisits. Completing a task provides evidence for the skills assessed in that task. It does not establish proficiency in an entire topic or language.
 
-During setup, the coach proposes the following version-1 rules for your approval. Rewards aren't enabled until you agree to them.
-
-### How you earn XP
-
-| Event | XP | Requirements |
-| --- | --- | --- |
-| Complete an exercise | 100 | A requested review verifies all required criteria. Both `complete` and `complete with revisit scheduled` qualify. Assisted completion also qualifies, with assistance labeled. |
-| Verify retention of a named skill | 25 | After an independent demonstration and an agreed delay, another exercise verifies independent use in a meaningfully different context. Awarded once per skill. |
-| Submit work, receive `revise`, or receive a provisional review | 0 | An attempt alone earns no completion award. Fixing the same exercise can earn its completion XP once a review verifies the criteria. |
-
-You earn completion XP once per exercise and retention XP once per named skill. Same-context fixes, self-reported results, and repeated reviews earn no extra XP.
-
-### Badges and their requirements
-
-| Badge | Earned when |
+| State | What it means |
 | --- | --- |
-| `First Finish` | You complete your first reviewed exercise. Any assistance is labeled. |
-| `Independent Builder` | You independently demonstrate an exercise's primary skill: your own work meets verified criteria, and you explain a meaningful decision assessed in that work. |
-| `Retention Check` | You pass your first independently verified delayed skill revisit. |
+| `unassessed` | No relevant evidence observed. Self-reported experience guides setup only. |
+| `practicing` | Relevant attempts, but requirements for independent demonstration aren't met. |
+| `demonstrated` | Independently authored work meets verified criteria, and you can explain a meaningful decision assessed in that work. |
+| `retention checked` | After an agreed delay, independent work verifies the skill again in a meaningfully different context. |
 
-Each badge is awarded once and links to supporting evidence. Badges don't add bonus XP.
+Substantial hints and solutions receive assistance labels. Affected skills need fresh independent work before counting as demonstrated. Delayed revisits are agreed practice targets, not automatic calendar reminders.
 
-### Example: 225 XP across two exercises
+</details>
 
-This example uses approved default rules. It isn't an actual learner record.
+<details>
+<summary>Updates</summary>
 
-1. You independently complete your first exercise and explain the assessed decision. You earn 100 XP, `First Finish`, and `Independent Builder`.
-2. After an agreed delay, you independently complete a different exercise that also verifies retention of that previously demonstrated skill. You earn 100 XP for completion, 25 XP for the skill revisit, and `Retention Check`.
-3. Your total is 225 XP. Another review of either exercise adds nothing. Revisiting the same skill again earns no further retention XP.
+For the Claude Code plugin, run `claude plugin update agenticexercise@agenticexercise-marketplace`.
 
-If you need substantial hints or a solution, a verified completion can still earn 100 XP. Affected skills remain labeled as assisted. They need fresh independent evidence before they can count as demonstrated or qualify for a later retention award.
+For the Codex plugin, run `codex plugin marketplace upgrade`, then use `/plugins` to inspect and manage available updates.
 
-### Where rewards live
+Restart your session after updating. Maintainers must bump both plugin manifest versions for each release.
 
-`REPORT.md` holds your XP ledger, total, badges, and evidence links. The coach refreshes it after reviewed completion or when you explicitly request a report. For example:
+For the standalone skill, reuse your host's installation prompt and ask to update the existing installation. Have the agent compare fresh source with installed files and show additions, changes, and deletions for approval before replacement. Stop on unexpected symlinks or unrelated content. Preserve the old installation until replacement succeeds, remove obsolete policy files only with approval, and verify copied files and relative links. Leave learner code and records unchanged; report any partial failure.
 
-```text
-Show my XP total, badges, and the evidence behind each award.
-```
-
-Each XP award has a stable ID, rule version, amount, date, evidence link, and assistance label. Repeated reviews and report refreshes cannot duplicate awards. Corrections keep the original entry and add a dated adjustment. Badge corrections also preserve history and mark the badge as active or retracted.
-
-You can agree to different reward rules during setup or later. Changes get an explicit rule version and apply going forward; they don't silently recalculate old awards. There are no streaks, daily quotas, or mastery levels based on XP.
+</details>
 
 ## Things you can ask
 
-Use ordinary language after loading the skill. These are example requests, not additional slash commands:
+After loading the skill, you can make requests in ordinary language. These examples aren't additional slash commands:
 
 ```text
 Give me one small hint, not a solution.
-Explain what makes a test case a boundary case.
 Review my submission against the exercise brief.
+Show my XP total, badges, and the evidence behind each award.
 Show which skills I have demonstrated independently and which need work.
 Continue my unfinished exercise.
-Switch future practice to SQL, but keep my Python history.
+Switch future practice to SQL, but keep my Go history.
 Let's agree on a delayed revisit for input validation.
 ```
 
-## Limits and privacy
+## Boundaries and privacy
 
-- AgenticExercise is a set of coaching instructions for your coding agent. It provides no sandbox or separate learning platform. Coaching quality depends on your host and model, and learning outcomes aren't guaranteed. The first release focuses on programming.
-- Before installing, review the skill files and [license](LICENSE). Choose either the plugin or the standalone skill for your host to avoid loading duplicate instructions. Installation and coaching behavior haven't been smoke-tested on either host.
-- Keep exercises and progress in a learner workspace outside the installed skill folder. Back it up before moving it or merging existing learning records. Skill updates should leave that history untouched.
-- Keep your host's permission controls enabled. Review requests to run commands, install dependencies, access the network, or publish files. The skill asks the agent to seek approval but cannot enforce those boundaries.
-- Your provider may process code and learner records even when the files live locally. Check the provider's data handling and your host settings before using sensitive code or personal information. Keep credentials out of practice material.
-- Source repository: [1001api/AgenticExercise](https://github.com/1001api/AgenticExercise).
+- AgenticExercise provides coaching instructions. It does not provide a sandbox or separate learning platform. Quality depends on your host and model; learning outcomes aren't guaranteed. The first release focuses on programming.
+- Keep host permission controls enabled. Review requests to run commands, install dependencies, access the network, or publish files. The skill asks for approval but cannot enforce those boundaries.
+- Your provider may process code and learner records even when files live locally. Check provider data handling and host settings before using sensitive material. Keep credentials out of exercises.
 
-## Read the coaching rules
-
-See [`SKILL.md`](skills/agenticexercise/SKILL.md) for the coaching instructions and links to [onboarding](skills/agenticexercise/references/onboarding.md), [practice and review](skills/agenticexercise/references/practice.md), and [progress and rewards](skills/agenticexercise/references/progress.md). These rules describe how the coach should behave. The examples above are not evidence that either host has passed behavioral tests.
+[Coaching rules](skills/agenticexercise/SKILL.md) · [Onboarding](skills/agenticexercise/references/onboarding.md) · [Practice and review](skills/agenticexercise/references/practice.md) · [Progress and rewards](skills/agenticexercise/references/progress.md) · [License](LICENSE)
