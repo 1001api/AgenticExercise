@@ -1,16 +1,44 @@
 # AgenticExercise
 
-Practice programming with your coding agent. Get exercises based on what you want to learn, ask for hints when you're stuck, and request reviews of your work.
+Practice programming with Claude Code or Codex. Tell the agent what you want to learn, work through exercises, and ask for hints or a review when you need them.
 
-You write the code, tests, and fixes. The coach uses your work to decide what to practice next and what needs another attempt. Your goals and progress live in a separate learner workspace so you can pick up where you left off.
-
-Works with Claude Code and Codex. You don't need a separate app, custom runtime, or Superpowers dependency.
+You write the code and tests, then fix issues found in review. The coach uses those attempts to choose what you practice next. It keeps your goals and progress in a separate learner workspace so you can continue in another session.
 
 ## Install and start
 
-Paste one of these prompts into your coding agent. Your agent handles installation from [1001api/AgenticExercise](https://github.com/1001api/AgenticExercise)—you don't need to copy files yourself.
+### Claude Code plugin
 
-### Claude Code
+Run in your terminal:
+
+```sh
+claude plugin marketplace add 1001api/AgenticExercise
+claude plugin install agenticexercise@agenticexercise-marketplace
+```
+
+Start a new session and run `/agenticexercise:agenticexercise`.
+
+Or install inside Claude Code:
+
+```text
+/plugin install agenticexercise --marketplace 1001api/AgenticExercise
+```
+
+### Codex plugin
+
+Run in your terminal:
+
+```sh
+codex plugin marketplace add 1001api/AgenticExercise
+codex plugin add agenticexercise@agenticexercise-marketplace
+```
+
+Start a new session, then use `/skills` or type `$` and select `agenticexercise`. Use `/plugins` to manage the plugin interactively. If your CLI does not have `plugin` commands, update it or use the standalone-skill fallback below.
+
+### Standalone-skill fallback
+
+Choose either the plugin or the standalone skill to avoid loading the coaching instructions twice. For the standalone skill, paste the matching prompt into your coding agent and let it handle installation.
+
+**Claude Code:**
 
 ```text
 Install AgenticExercise for Claude Code from https://github.com/1001api/AgenticExercise.git.
@@ -25,7 +53,7 @@ and learner records unchanged. Verify copied files and relative links, report
 checks actually performed, then tell me how to start with /agenticexercise.
 ```
 
-### Codex
+**Codex:**
 
 ```text
 Install AgenticExercise for Codex from https://github.com/1001api/AgenticExercise.git.
@@ -45,7 +73,7 @@ Use one installation per host. Keep learner records outside the installation dir
 
 ### Start practicing
 
-In Claude Code, run `/agenticexercise`. In Codex, use `/skills` or type `$` and select `agenticexercise`. If the skill is missing, restart your session and check that the chosen installation path contains `SKILL.md` and `references/`. As a session-only fallback, ask your agent to read the inspected `SKILL.md` and its linked references; this does not verify native skill discovery.
+In Claude Code, run `/agenticexercise:agenticexercise` for the plugin or `/agenticexercise` for the standalone skill. In Codex, use `/skills` or type `$` and select `agenticexercise`. If missing, restart your session and check that the plugin is enabled, or that the standalone installation contains `SKILL.md` and `references/`. As a session-only fallback, ask your agent to read the inspected `SKILL.md` and its linked references; this does not verify native skill discovery.
 
 Once the skill is loaded, describe what you want to practice:
 
@@ -58,13 +86,15 @@ The coach asks questions one at a time, then proposes a setup, including reward 
 
 ### Updates
 
-Reuse your host's installation prompt and ask to update the existing installation. Have the agent compare fresh source with installed files and show additions, changes, and deletions for approval before replacement. Stop on unexpected symlinks or unrelated content. Preserve the old installation until replacement succeeds, remove obsolete policy files only with approval, and verify copied files and relative links. Leave learner code and records unchanged; report any partial failure.
+For the Claude Code plugin, run `claude plugin update agenticexercise@agenticexercise-marketplace`. For Codex, run `codex plugin marketplace upgrade`, then use `/plugins` to inspect and manage available updates. Restart your session after updating. Maintainers must bump both plugin manifest versions for each release.
+
+For a standalone skill, reuse your host's installation prompt and ask to update the existing installation. Have the agent compare fresh source with installed files and show additions, changes, and deletions for approval before replacement. Stop on unexpected symlinks or unrelated content. Preserve the old installation until replacement succeeds, remove obsolete policy files only with approval, and verify copied files and relative links. Leave learner code and records unchanged; report any partial failure.
 
 Host discovery and coaching behavior have not been smoke-tested. File and link checks do not validate coaching behavior or certify safe installation.
 
 ## What practice looks like
 
-Here's an example for someone practicing Python input validation in 30-minute sessions. It illustrates the workflow; it isn't a recorded test result.
+For example, suppose you want to practice Python input validation in 30-minute sessions. This is a sample session, not a recorded test result.
 
 1. The coach asks about your goals, experience, sticking points, time, and preferences, one question at a time. You approve the proposed setup and confirm where learner files should live.
 2. You get an exercise: read an expense CSV and summarize totals by category. The brief spells out expected behavior, how to handle malformed input, constraints, and what counts as finished. It leaves the implementation to you.
@@ -78,7 +108,7 @@ There's no fixed exercise backlog or daily quota. Unfinished work carries over t
 
 ### Exercises with a finish line
 
-Each exercise specifies its primary skill, expected effort, observable acceptance criteria, relevant input/output examples, permitted resources, and non-goals. The scope starts with your reported experience and available time, then changes based on reviewed work.
+Each exercise names the skill you'll practice, how much effort to expect, and what you need to show to finish. The brief includes relevant input/output examples, allowed resources, and work outside its scope. Your reported experience and available time guide the first exercises; reviewed work guides later ones.
 
 Practice can cover languages, tooling, algorithms, practical tasks, or a mix. You can change goals, pace, or topic without going through the full onboarding again. Earlier attempts and progress stay in your records.
 
@@ -96,7 +126,7 @@ The review distinguishes checks the coach observed, results you reported, and be
 
 ## How practice follows your progress
 
-The coach uses recurring defects, your explanations, verified independent work, and delayed revisits to adjust exercises one meaningful dimension at a time. Finishing one task doesn't advance an entire topic or language track.
+The coach adjusts one part of an exercise at a time based on mistakes that recur, your explanations, work you've completed independently and verified, and later revisits. Completing a task provides evidence for the skills assessed in it, not an entire topic or language.
 
 Each skill has its own state:
 
@@ -125,7 +155,7 @@ The coach creates records only when there's something to put in them. Reports re
 
 ## XP and rewards
 
-XP records completed practice and verified retention. Badges mark specific milestones. Skill evidence tracks what you can do independently, so a high XP total doesn't establish mastery or automatically unlock harder exercises.
+You earn XP for completed practice and verified retention, and badges for specific milestones. The coach chooses harder exercises based on evidence of what you can do independently. A high XP total alone doesn't establish mastery.
 
 During setup, the coach proposes the following version-1 rules for your approval. Rewards aren't enabled until you agree to them.
 
@@ -196,4 +226,4 @@ Let's agree on a delayed revisit for input validation.
 
 ## Read the coaching rules
 
-[`SKILL.md`](skills/agenticexercise/SKILL.md) points to the rules for [onboarding](skills/agenticexercise/references/onboarding.md), [practice and review](skills/agenticexercise/references/practice.md), and [progress and rewards](skills/agenticexercise/references/progress.md). Those files define the intended behavior. The examples above don't establish that hosts have passed behavioral tests.
+See [`SKILL.md`](skills/agenticexercise/SKILL.md) for the coaching instructions and links to [onboarding](skills/agenticexercise/references/onboarding.md), [practice and review](skills/agenticexercise/references/practice.md), and [progress and rewards](skills/agenticexercise/references/progress.md). These rules describe how the coach should behave. The examples above are not evidence that either host has passed behavioral tests.

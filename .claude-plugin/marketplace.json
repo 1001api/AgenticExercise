@@ -1,0 +1,12 @@
+{
+  "name": "agenticexercise-marketplace",
+  "description": "AgenticExercise programming-practice coaching plugin.",
+  "owner": { "name": "1001api" },
+  "plugins": [
+    {
+      "name": "agenticexercise",
+      "source": "./",
+      "description": "Programming practice with exercises, hints, reviews, and progress tracking."
+    }
+  ]
+}

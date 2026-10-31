@@ -1,0 +1,6 @@
+{
+  "name": "agenticexercise",
+  "version": "0.1.0",
+  "description": "Programming practice with bounded exercises, requested hints, evidence-based reviews, and learner progress.",
+  "skills": "./skills/"
+}
