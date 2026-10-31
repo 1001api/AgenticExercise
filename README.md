@@ -1,54 +1,199 @@
 # AgenticExercise
 
-Portable programming-practice tutoring skill for Claude Code and Codex. Learner writes code, tests, dependencies, and fixes; agent offers bounded exercises, requested hints, evidence-based review, and progress records. No app, API subscription integration, custom runtime, installer script, or required Superpowers dependency.
+Practice programming with your coding agent. Get exercises based on what you want to learn, ask for hints when you're stuck, and request reviews of your work.
 
-**Status: draft, not behaviorally validated.** Structural checks do not prove coaching compliance. Programming is intended first-release scope; neither host discovery nor arbitrary-domain assessment has been smoke-tested. See [test results](tests/RESULTS.md) and [scenarios](tests/scenarios.md).
+You write the code, tests, and fixes. The coach uses your work to decide what to practice next and what needs another attempt. Your goals and progress live in a separate learner workspace so you can pick up where you left off.
 
-## Install safely
+Works with Claude Code and Codex. You don't need a separate app, custom runtime, or Superpowers dependency.
 
-Exact source folder: `skills/agenticexercise/`, including `SKILL.md` and `references/`. Copy only that folder to one selected destination:
+## Install and start
 
-| Host | Project-local destination | Personal destination | Invocation |
-| --- | --- | --- | --- |
-| Claude Code | `.claude/skills/agenticexercise/` | `~/.claude/skills/agenticexercise/` | `/agenticexercise` |
-| Codex | `.agents/skills/agenticexercise/` | `~/.agents/skills/agenticexercise/` | `/skills`, or type `$` and select `agenticexercise` |
+Paste one of these prompts into your coding agent. Your agent handles installation from [1001api/AgenticExercise](https://github.com/1001api/AgenticExercise)—you don't need to copy files yourself.
 
-Project-local paths are relative to intended learner project, not necessarily this repository. Codex scans `.agents/skills` from current directory up to repository root. Avoid duplicate copies in multiple scopes. Do not put personal learner state inside installation directory. Personal installations affect more than one project; choose that scope deliberately.
+### Claude Code
 
-Give installer agent this prompt, replacing placeholder with actual repository URL. URL alone is not installation permission:
-
-> Inspect repository at `<REPOSITORY_URL>` for AgenticExercise. Fetch into a new empty temporary directory. Read source before installing. Do not execute downloaded scripts, hooks, or build tools. Exact source is `skills/agenticexercise/`; inspect its whole contents, symlinks, and destination before copying. Ask which host and project-local or personal scope I want, then show resolved destination for approval. Reject source symlinks or paths escaping inspected folder. Do not follow destination symlinks or overwrite an existing installation without showing changes and obtaining separate approval. Copy only inspected skill folder; no repository configuration or learner records. Do not commit, publish, or transfer learner code. Keep learner workspace separate and unchanged. Report copied files and checks actually performed; do not claim host discovery passed unless observed.
-
-No repository owner, hosted URL, or license grant is supplied here. Obtain source URL and usage permission from repository owner.
-
-## Start practice
-
-In Claude Code, invoke `/agenticexercise` and describe goals. In Codex, use `/skills` or `$agenticexercise`. Codex detects newly installed skills automatically; restart if missing. If Claude Code does not show skill, start a new session and check destination and `SKILL.md`.
-
-Skill interviews one question at a time, proposes setup, then waits for approval. Confirm separate learner workspace before state creation. Proposed reward defaults: 100 XP per reviewed completion and 25 XP per independently verified delayed skill revisit, with stable once-only keys. XP never proves mastery.
-
-Learner workspace holds `LEARNING.md`, `PROGRESS.md`, `REPORT.md`, and per-exercise briefs/review history. No personal goals, submissions, or progress belong in distributed package. Conceptual explanations and requested small hints stay within tutoring boundaries. Solutions or code edits require warning plus separate scoped confirmation; exposure stays labeled.
-
-Manual fallback when discovery is unavailable: ask host to read `skills/agenticexercise/SKILL.md` plus its linked references from inspected local source and follow them for this session. This is manual instruction loading, not verified native integration or a guarantee that host honors policy.
-
-## Update
-
-Inspect fresh source in a new empty directory; compare installed folder before touching it. Show additions, changes, deletions, and resolved destination; require approval before replacement. Replace only approved policy files, handling removed files explicitly rather than blindly merging stale references. Preserve old installation until new copy succeeds; report partial failures. Never change separate learner workspace, import someone else's records, or execute downloaded update scripts. Verify links after copy. Stop on unexpected symlinks or unrelated destination content. No real installation is performed by this repository's checks.
-
-## Validate locally
-
-From repository root:
-
-```sh
-python3 -I tests/check_skill.py
-git diff --check
+```text
+Install AgenticExercise for Claude Code from https://github.com/1001api/AgenticExercise.git.
+Fetch into a new empty temporary directory and inspect skills/agenticexercise/,
+including all references. Do not execute downloaded scripts, hooks, or build tools.
+Ask whether I want installation in my learner project's .claude/skills/agenticexercise/
+or in ~/.claude/skills/agenticexercise/ for all projects. Show the resolved path
+for approval, then copy only the inspected skill folder. Reject source symlinks
+and escaping paths; do not follow destination symlinks. If already installed,
+show differences and ask before replacing anything. Leave repository configuration
+and learner records unchanged. Verify copied files and relative links, report
+checks actually performed, then tell me how to start with /agenticexercise.
 ```
 
-Checker uses Python standard library. Checks required files, simple metadata, relative inline Markdown links, reference routing, core word budget, machine-local paths, and unwanted authoring dependency references. Temporary negative fixtures verify missing reference and wrong metadata rejection. It does **not** test tutoring behavior, assess learner submissions, prove host discovery, or certify safe installs. `git diff --check` excludes untracked files; inspect those separately before committing.
+### Codex
 
-## Documentation checked 2026-11-01
+```text
+Install AgenticExercise for Codex from https://github.com/1001api/AgenticExercise.git.
+Fetch into a new empty temporary directory and inspect skills/agenticexercise/,
+including all references. Do not execute downloaded scripts, hooks, or build tools.
+Ask whether I want installation in my learner project's .agents/skills/agenticexercise/
+or in ~/.agents/skills/agenticexercise/ for all projects. Show the resolved path
+for approval, then copy only the inspected skill folder. Reject source symlinks
+and escaping paths; do not follow destination symlinks. If already installed,
+show differences and ask before replacing anything. Leave repository configuration
+and learner records unchanged. Verify copied files and relative links, report
+checks actually performed, then tell me how to select agenticexercise with /skills
+or by typing $.
+```
 
-- [Claude Code skills](https://code.claude.com/docs/en/skills): project/personal paths and slash invocation. This package supplies both `name` and `description`, although Claude Code permits their omission.
-- [Codex skills entry](https://developers.openai.com/codex/skills/), redirected to [Build skills](https://learn.chatgpt.com/docs/build-skills): `.agents/skills` paths, `/skills` and `$` invocation, required `name`/`description`, automatic detection with restart fallback.
+Use one installation per host. Keep learner records outside the installation directory. File checks alone do not establish that your host discovered the skill.
 
-Documentation checks are not host smoke tests. Behavior can vary with host version, higher-priority instructions, and model. Review limitations before relying on draft for independent-practice enforcement.
+### Start practicing
+
+In Claude Code, run `/agenticexercise`. In Codex, use `/skills` or type `$` and select `agenticexercise`. If the skill is missing, restart your session and check that the chosen installation path contains `SKILL.md` and `references/`. As a session-only fallback, ask your agent to read the inspected `SKILL.md` and its linked references; this does not verify native skill discovery.
+
+Once the skill is loaded, describe what you want to practice:
+
+```text
+I want to practice Python input validation. I can spend 30 minutes per
+session. I usually get stuck deciding what should happen with bad input.
+```
+
+The coach asks questions one at a time, then proposes a setup, including reward rules, for your approval. You'll confirm the learner workspace before it creates records or assigns your first exercise.
+
+### Updates
+
+Reuse your host's installation prompt and ask to update the existing installation. Have the agent compare fresh source with installed files and show additions, changes, and deletions for approval before replacement. Stop on unexpected symlinks or unrelated content. Preserve the old installation until replacement succeeds, remove obsolete policy files only with approval, and verify copied files and relative links. Leave learner code and records unchanged; report any partial failure.
+
+Host discovery and coaching behavior have not been smoke-tested. File and link checks do not validate coaching behavior or certify safe installation.
+
+## What practice looks like
+
+Here's an example for someone practicing Python input validation in 30-minute sessions. It illustrates the workflow; it isn't a recorded test result.
+
+1. The coach asks about your goals, experience, sticking points, time, and preferences, one question at a time. You approve the proposed setup and confirm where learner files should live.
+2. You get an exercise: read an expense CSV and summarize totals by category. The brief spells out expected behavior, how to handle malformed input, constraints, and what counts as finished. It leaves the implementation to you.
+3. You write code and tests. If you ask for a hint, the coach gives one small pointer or diagnostic question, then waits for your attempt.
+4. You request a review. The coach checks your submission against the brief using evidence it has permission to access. It might point out a row that crashes the parser and where the failure occurs. You write the fix.
+5. If required behavior hasn't been verified, the review stays provisional. Once the required criteria are verified, the exercise can be marked complete, with any assistance recorded. Those findings inform later exercises. You can also agree on a delayed revisit to check whether you can apply the skill independently in another context.
+
+There's no fixed exercise backlog or daily quota. Unfinished work carries over to the next session unless you choose to pause or change direction.
+
+## How coaching works
+
+### Exercises with a finish line
+
+Each exercise specifies its primary skill, expected effort, observable acceptance criteria, relevant input/output examples, permitted resources, and non-goals. The scope starts with your reported experience and available time, then changes based on reviewed work.
+
+Practice can cover languages, tooling, algorithms, practical tasks, or a mix. You can change goals, pace, or topic without going through the full onboarding again. Earlier attempts and progress stay in your records.
+
+### Help when you ask
+
+Ask a conceptual question for an explanation, or request a small hint when you're stuck. The coach should not offer starter code, reference solutions, or pseudocode that gives away the implementation.
+
+If you ask for a solution, tests, dependency setup, or edits to your code, the coach explains how that help affects your practice. It then asks for separate confirmation that names the exercise and scope. Confirmed help goes in your records, and the affected work cannot count as an independent demonstration.
+
+### Review you can act on
+
+Reviews happen when you ask. The coach reads the brief, your submission, earlier attempts, and assistance history. It reports defects with concrete failing inputs or states and file/line locations where available. You make the fixes unless you separately confirm an exception.
+
+The review distinguishes checks the coach observed, results you reported, and behavior that remains unverified. Outcomes are `revise`, `complete`, or `complete with revisit scheduled`. Missing required verification prevents final completion. Earlier failures stay in the history, linked to their resolutions.
+
+## How practice follows your progress
+
+The coach uses recurring defects, your explanations, verified independent work, and delayed revisits to adjust exercises one meaningful dimension at a time. Finishing one task doesn't advance an entire topic or language track.
+
+Each skill has its own state:
+
+| State | What it means |
+| --- | --- |
+| `unassessed` | No relevant evidence has been observed yet. Self-reported experience guides setup only. |
+| `practicing` | You've made relevant attempts but haven't met the requirements for independent demonstration. |
+| `demonstrated` | Work you authored independently meets verified criteria, and you can explain a meaningful decision assessed in that work. |
+| `retention checked` | After an agreed delay, independent work verifies the skill again in a meaningfully different context. |
+
+Substantial hints and solutions receive assistance labels. You'll need fresh independent work before an affected skill can count as demonstrated. Delayed revisits are practice targets you agree to, not automatic calendar reminders.
+
+## Progress across sessions
+
+Your learner workspace holds approved goals, the current exercise, your next action, review history, strengths, gaps, and revisit targets. Ask for a progress report to see the evidence and assistance labels behind the assessments.
+
+| File | Purpose |
+| --- | --- |
+| `LEARNING.md` | Approved goals, preferences, time budget, and coaching boundaries. |
+| `PROGRESS.md` | Active exercise, next action, assistance summary, and per-skill evidence. |
+| `exercises/<numeric-id>-<slug>/BRIEF.md` | Exercise goal, criteria, constraints, and finish line. |
+| `exercises/<numeric-id>-<slug>/REVIEW.md` | Dated review attempts, actual checks, findings, assistance, and outcomes. |
+| `REPORT.md` | Cumulative strengths, gaps, completed work, awards, and revisit evidence. |
+
+The coach creates records only when there's something to put in them. Reports refresh after reviewed completion or when you ask. Ordinary conceptual questions don't require updates to your records.
+
+## XP and rewards
+
+XP records completed practice and verified retention. Badges mark specific milestones. Skill evidence tracks what you can do independently, so a high XP total doesn't establish mastery or automatically unlock harder exercises.
+
+During setup, the coach proposes the following version-1 rules for your approval. Rewards aren't enabled until you agree to them.
+
+### How you earn XP
+
+| Event | XP | Requirements |
+| --- | --- | --- |
+| Complete an exercise | 100 | A requested review verifies all required criteria. Both `complete` and `complete with revisit scheduled` qualify. Assisted completion also qualifies, with assistance labeled. |
+| Verify retention of a named skill | 25 | After an independent demonstration and an agreed delay, another exercise verifies independent use in a meaningfully different context. Awarded once per skill. |
+| Submit work, receive `revise`, or receive a provisional review | 0 | An attempt alone earns no completion award. Fixing the same exercise can earn its completion XP once a review verifies the criteria. |
+
+You earn completion XP once per exercise and retention XP once per named skill. Same-context fixes, self-reported results, and repeated reviews earn no extra XP.
+
+### Badges and their requirements
+
+| Badge | Earned when |
+| --- | --- |
+| `First Finish` | You complete your first reviewed exercise. Any assistance is labeled. |
+| `Independent Builder` | You independently demonstrate an exercise's primary skill: your own work meets verified criteria, and you explain a meaningful decision assessed in that work. |
+| `Retention Check` | You pass your first independently verified delayed skill revisit. |
+
+Each badge is awarded once and links to supporting evidence. Badges don't add bonus XP.
+
+### Example: 225 XP across two exercises
+
+This example uses approved default rules. It isn't an actual learner record.
+
+1. You independently complete your first exercise and explain the assessed decision. You earn 100 XP, `First Finish`, and `Independent Builder`.
+2. After an agreed delay, you independently complete a different exercise that also verifies retention of that previously demonstrated skill. You earn 100 XP for completion, 25 XP for the skill revisit, and `Retention Check`.
+3. Your total is 225 XP. Another review of either exercise adds nothing. Revisiting the same skill again earns no further retention XP.
+
+If you need substantial hints or a solution, a verified completion can still earn 100 XP. Affected skills remain labeled as assisted. They need fresh independent evidence before they can count as demonstrated or qualify for a later retention award.
+
+### Where rewards live
+
+`REPORT.md` holds your XP ledger, total, badges, and evidence links. The coach refreshes it after reviewed completion or when you explicitly request a report. For example:
+
+```text
+Show my XP total, badges, and the evidence behind each award.
+```
+
+Each XP award has a stable ID, rule version, amount, date, evidence link, and assistance label. Repeated reviews and report refreshes cannot duplicate awards. Corrections keep the original entry and add a dated adjustment. Badge corrections also preserve history and mark the badge as active or retracted.
+
+You can agree to different reward rules during setup or later. Changes get an explicit rule version and apply going forward; they don't silently recalculate old awards. There are no streaks, daily quotas, or mastery levels based on XP.
+
+## Things you can ask
+
+Use ordinary language after loading the skill. These are example requests, not additional slash commands:
+
+```text
+Give me one small hint, not a solution.
+Explain what makes a test case a boundary case.
+Review my submission against the exercise brief.
+Show which skills I have demonstrated independently and which need work.
+Continue my unfinished exercise.
+Switch future practice to SQL, but keep my Python history.
+Let's agree on a delayed revisit for input validation.
+```
+
+## Limits and privacy
+
+- This is a set of coaching instructions. The host version, model, and higher-priority instructions can affect how well they're followed. The skill cannot guarantee independent practice or learning outcomes.
+- The intended scope for the first release is programming. Customization doesn't establish reliable assessment in other domains.
+- Keep learner records in your confirmed workspace, never in the distributed skill folder. Existing content and conflicting history must be inspected and reconciled, not silently overwritten.
+- The skill doesn't authorize commits, publishing, uploads, installs, or external code transfer. Each requires explicit permission. Reviews also require approval before network access, dependency installation, destructive checks, or other effects you haven't authorized.
+- Workspace files don't establish privacy guarantees for the host. Check your coding agent's data handling before using sensitive code or learner information.
+- Source repository: [1001api/AgenticExercise](https://github.com/1001api/AgenticExercise). Review its license before use.
+
+## Read the coaching rules
+
+[`SKILL.md`](skills/agenticexercise/SKILL.md) points to the rules for [onboarding](skills/agenticexercise/references/onboarding.md), [practice and review](skills/agenticexercise/references/practice.md), and [progress and rewards](skills/agenticexercise/references/progress.md). Those files define the intended behavior. The examples above don't establish that hosts have passed behavioral tests.
